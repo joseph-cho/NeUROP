@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BU | NeUROP</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.min.css"> 
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="viewport" content="width=devise-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <a href="index.html" id="logo">
+        <h1><a href="index.html"><img src = "img/neuropWhiteOut.png" alt = "NeUROP Logo" class = "groupLogo" ></a>Boston University</h1>
+        <h2>Neuroscience</h2>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="index.html" class="selected">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="myGrades.html">myGrades</a></li>
+        </ul>
+      </nav>
+      
+    </header>
+    <div>
+      <section>
+        <style>
+          ul {
+            list-style-type: none;
+            margin:0;
+            padding:0;
+          }
+        </style>
+
+      <button id="body">Body</button>
+      <button id="hat">Hat</button>
+      <button id="cullenTwo">Cullen</button>
+
+      <div style="position:center">
+        <img id="cullenTest" src="img/cullen.png"></img>
+        <img id="cullen2" src="img/cullen2.png" style="position:absolute; top:33%; right:34%; max-width:500px"></img>
+        <img id="cullenHat" src="img/cullenHat.png" style="position:absolute; top:35%; right:47.7%; max-width:105px;"></img>
+      </div>
+
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+      <script>
+      $(document).ready(function(){
+          $("#body").click(function(){
+              $("#cullenTest").toggle();
+          });
+      });
+
+      $(document).ready(function(){
+          $("#hat").click(function(){
+              $("#cullenHat").toggle();
+          });
+      });
+
+      $(document).ready(function(){
+          $("#cullenTwo").click(function(){
+              $("#cullen2").toggle();
+          });
+      });
+      </script>
+
+
+      </section>
+      <footer>
+        <a href="http://twitter.com/bumedicine"><img src="img/twitter-wrap.png" alt="Twitter Logo" class="social-icon"></a>
+        <a href="http://facebook.com/bumedicine"><img src="img/facebook-wrap.png" alt="Facebook Logo" class="social-icon"></a>
+        <p>&copy; 2015 Boston University Neuroscience</p>
+      </footer>
+    </div>
+  </body>
+</html>
+
+
+
+
+
+
+
+
+

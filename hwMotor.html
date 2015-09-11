@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BU | NeUROP</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="viewport" content="width=devise-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <div class="header">
+        <img src="img/headerLogo.png" alt="BU">
+        <h1>Neuroscience<h1>
+      </div>
+
+      <nav>
+        <ul>
+          <li><a href="index.html" class="selected">Home</a></li>
+          <li><a href="resources.html">Resources</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="myGrades.html">myGrades</a></li>
+        </ul>
+      </nav>
+      
+    </header>
+    <div>
+      <section>
+        <h2 id="test_status"></h2>
+        <div id="test"></div>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.5.2/jquery.min.js"></script>
+        <script src="js/Motorq_list.js"></script>
+        <script type="text/javascript">
+          var pos = 0, test, test_status, question, choice, choices, chA, chB, chC, chD, correct = 0; 
+          var tries = 0; //keeps track of how many times student attempts problem
+          var points = 0;
+          function _(x) {
+            return document.getElementById(x);
+          }
+
+          function renderQuestion() {
+            console.log("current question = " + (pos+1));
+            test = _("test");
+            if (pos >= questions.length) {
+              test.innerHTML = "<h2>You got "+points+" out of "+questions.length+" points.</h2>";
+              _("test_status").innerHTML = "Homework Completed";
+              pos = 0;
+              correct = 0;
+              return false;
+            }
+            type = questions[pos][0];
+            console.log("type is: " + type);
+            if (type == "diagram") {
+              console.log("The type is diagram!");
+              renderDiagram();
+            } else {
+              renderMCQuestion();
+            }
+          }
+          renderQuestion();
+
+          //create a multiple-choice function
+          function renderMCQuestion() {
+            _("test_status").innerHTML = "Question " + (pos+1) + " of " + questions.length;
+            question = questions[pos][1];
+            chA = questions[pos][2];
+            chB = questions[pos][3];
+            chC = questions[pos][4];
+            chD = questions[pos][5];
+            chE = questions[pos][6];
+            test.innerHTML = "<h3>"+question+"</h3>";
+            test.innerHTML += "<input type='radio' name = 'choices' value='A'> "+chA+"<br>";
+            test.innerHTML += "<input type='radio' name = 'choices' value='B'> "+chB+"<br>";
+            test.innerHTML += "<input type='radio' name = 'choices' value='C'> "+chC+"<br>";
+            test.innerHTML += "<input type='radio' name = 'choices' value='D'> "+chD+"<br>";
+            test.innerHTML += "<input type='radio' name = 'choices' value='E'> "+chE+"<br><br>";
+            test.innerHTML += "<button onclick='checkMCAnswer()' class='btn btn-danger'>Submit</button>";
+            if (questions[pos].length == 9) {
+              test.innerHTML += "<img src=" + questions[pos][8] + "></img>";
+            }
+          }
+
+          //create a diagram question
+          function renderDiagram() {
+            _("test_status").innerHTML = "Question " + (pos+1) + " of " + questions.length;
+            question = questions[pos][1];
+            test.innerHTML = "<h3>"+question+"</h3>";
+            test.innerHTML += "<img src =" + questions[pos][2] + " class = 'map' usemap = '#sections'></img>";
+            test.innerHTML += "<map class='tabs' name='sections'> <area id='frontalCortex' shape='poly' alt='' onclick='toggleSelection(0)' coords=" + questions[pos][5] + " href='#map2-info' /> <area id='occipitalLobe' shape='poly' alt='' onclick='toggleSelection(1)' coords=" + questions[pos][6] + " href='#map3-info' /> <area id='cerebellum' shape='poly' alt='' onclick='toggleSelection(2)' coords=" + questions[pos][7] + " href='#map1-info' /> <area id='temporalLobe' shape='poly' alt='' onclick='toggleSelection(3)' coords=" + questions[pos][8] + " href='#map1-info' /> <area id='parietalLobe' shape='poly' alt='' onclick='toggleSelection(4)' coords=" + questions[pos][9] + " href='#map1-info' /> <area id='' shape='poly' alt='' onclick='toggleSelection(5)' coords=" + questions[pos][10] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(6)' coords=" + questions[pos][11] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(7)' coords=" + questions[pos][12] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(8)' coords=" + questions[pos][13] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(9)' coords=" + questions[pos][14] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(10)' coords=" + questions[pos][15] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(11)' coords=" + questions[pos][16] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(12)' coords=" + questions[pos][17] + " href='#map2-info'/> <area id='' shape='poly' alt='' onclick='toggleSelection(13)' coords=" + questions[pos][18] + " href='#map2-info'/>";
+            test.innerHTML += "<button onclick='checkDiagramAnswer()' class='btn btn-danger'>Submit</button>";
+            maphilighter();
+          }
+
+          //highlights part of the image the user clicks
+          function maphilighter() {
+            $(function() {
+             //using the jquery map highlight plugin:<
+             //http://davidlynch.org/js/maphilight/docs/
+            
+             //initialize highlight
+             $('.map').maphilight({strokeColor:'808080',strokeWidth:0,fillColor:'00cd27'});
+
+
+             //hover effect
+             $('#maplink1').mouseover(function(e) {
+                $('#ponytail').mouseover();
+             }).mouseout(function(e) {
+                $('#ponytail').mouseout();
+             }).click(function(e) { e.preventDefault(); });
+                         
+                  
+             // initialize tabbing
+             $(".tabs area:eq(0)").each(function(){
+                 $(this).addClass("current");
+             });
+             $(".tab-content").each(function(){
+                 $(this).children(":not(:first)").hide();    
+             });
+                      
+                      
+             //map clicks
+             $(".tabs area").click(function(){
+                        
+             //This block is what creates highlighting by trigger the "alwaysOn", 
+             var data = $(this).data('maphilight') || {};
+             data.alwaysOn = !data.alwaysOn;
+             $(this).data('maphilight', data).trigger('alwaysOn.maphilight');
+             //there is also "neverOn" in the docs, but not sure how to get it to work
+                        
+                    
+             if ($(this).hasClass("current") == false)
+             {
+                 var thisTarget = $(this).attr("href");
+                                                         
+                 $(this).parents(".tabs").find('area.current').removeClass('current');
+                              
+                 $(this).addClass('current');
+                              
+                 $(this).parents(".tabs").nextAll(".tab-content").children(":visible").fadeOut(1, function() {
+                     $(thisTarget).fadeIn("fast");
+                 });
+             }
+             return false; 
+            });
+          });
+          }
+
+          //toggles the section that the user clicks on 
+          //between false and true
+          function toggleSelection(x) {
+            if (questions[pos][3][x] == false) {
+              questions[pos][3][x] = true;
+            } else {
+              questions[pos][3][x] = false;
+            }
+          }
+
+          //checks the user's diagram questions
+          function checkDiagramAnswer() {
+            var match = true;
+            for (var i = 0; i< questions[pos][4].length; i++) {
+              if (questions[pos][3][i] != questions[pos][4][i]) {
+                match = false;
+              } 
+            }
+            if (match == false) {
+              if (tries < 2) {
+                alert("Try Again");
+                tries++;
+              } else {
+                alert("Incorrect");
+                tries = 0;
+                pos++;
+                renderQuestion();
+              }
+            } else {//match must be true 
+              alert("Correct");
+              correct++;
+              if (tries == 0) {
+                points++;
+              } else if (tries == 1) {
+                points+= 0.67;
+              } else {
+                points+=.33;
+              }
+              pos++;
+              tries = 0;
+              renderQuestion();
+            }
+        }
+
+          //checks the user's multiple-choice questions
+          function checkMCAnswer(){
+            choices = document.getElementsByName("choices");//get all the choices
+            for (var i=0; i<choices.length; i++) { //traverse through the choices
+              if (choices[i].checked) {            //check which choice the student chose
+                choice = choices[i].value;         //set student's choice to var choice
+                if (choice == questions[pos][7]) { //check if student's choice is correct
+                  alert("Correct");
+                  correct++;  
+                  pos++;  
+                  if (tries == 0) {
+                    points++;
+                  } else { //user must have missed first chance
+                    points+=.5;
+                  }
+                  tries = 0;
+                } else if (choice != questions[pos][6] && tries < 1) {
+                  alert("Try again");
+                  tries++;
+                } else if (choice != question[pos][6] && tries >= 1) {
+                  alert("Incorrect");
+                  tries = 0;
+                  pos++;
+                }
+                renderQuestion();
+              }
+            }
+          }
+          window.addEventListener("load", renderMCQuestion, false);
+        </script>
+
+        <div id="backButton">
+          <button onclick="window.location.href='cranVentMen.html'" class='btn btn-danger'>Back</button>
+        </div>
+
+      </section>
+      <footer>
+        <a href="http://twitter.com/bumedicine"><img src="img/twitter-wrap.png" alt="Twitter Logo" class="social-icon"></a>
+        <a href="http://facebook.com/bumedicine"><img src="img/facebook-wrap.png" alt="Facebook Logo" class="social-icon"></a>
+        <p>&copy; 2015 Boston University Neuroscience</p>
+      </footer>
+    </div>
+    <script src="js/jquery-1.11.3.min.js"></script>
+    <script src="http://davidlynch.org/js/maphilight/jquery.maphilight.min.js"></script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>BU | NeUROP</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link href='http://fonts.googleapis.com/css?family=Changa+One|Open+Sans:400italic,700italic,400,700,800' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/responsive.css">
+    <meta name="viewport" content="width=devise-width, initial-scale=1.0">
+  </head>
+  <body>
+    <header>
+      <a href="index.html" id="logo">
+        <h1><a href="index.html"><img src = "img/neuropWhiteOut.png" alt = "NeUROP Logo" class = "groupLogo" ></a>Boston University</h1>
+        <h2>Neuroscience</h2>
+      </a>
+
+      <nav>
+        <ul>
+          <li><a href="index.html" class="selected">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="contact.html">Contact</a></li>
+          <li><a href="myGrades.html">myGrades</a></li>
+        </ul>
+      </nav>
+      
+    </header>
+    <div>
+      <section>
+        <style>
+          ul {
+            list-style-type: none;
+            margin:0;
+            padding:0;
+          }
+        </style>
+
+        <div id="question">
+          <h3>Neurologic Exam</h3>
+          <p>Case 1:</p>
+          <p class="question">
+            A 25 year-old man named Tommy is a football superstar. Throughout his football career, he’s had several concussions. On a crisp fall eve, Tommy rushes into the ER after being checked by an opponent.  Tommy presents with aphasia, dilation of his left pupil, and nausea. Where’s the damage in his brain?
+          </p>
+          <ul class="answers">
+            <input type="radio" name="q1" value="b" id="q1a"><label for="q1b">Right hemisphere occipital</label><br/>
+            <input type="radio" name="q1" value="a" id="q1b"><label for="q1a">Bilateral frontal lobe</label><br/>
+            <input type="radio" name="q1" value="c" id="q1c"><label for="q1c">Basal ganglia</label><br/>
+            <input type="radio" name="q1" value="d" id="q1d"><label for="q1d">Cerebellum</label><br/>
+          </ul>
+        </div>
+
+        <div id="results">
+          Reveal answer
+        </div>
+
+        <div id="category1">
+          <p><strong>Question 1:</strong> The correct answer is <strong>bilateral frontal lobe</strong>.</p>
+        </div>
+
+        <div id="category11">            
+          <p>Correct</p>                          
+        </div>
+
+        <div id="backButton">
+          <button onclick="window.location.href='hwNeuroExam.html'">Back</button>
+        </div>
+
+        <div id="nextButton">
+          <button onclick="window.location.href='hwNEcase2.html'">Next</button>
+        </div>
+
+      </section>
+      <footer>
+        <a href="http://twitter.com/bumedicine"><img src="img/twitter-wrap.png" alt="Twitter Logo" class="social-icon"></a>
+        <a href="http://facebook.com/bumedicine"><img src="img/facebook-wrap.png" alt="Facebook Logo" class="social-icon"></a>
+        <p>&copy; 2015 Boston University Neuroscience</p>
+      </footer>
+    </div>
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/quiz-1.js"></script>
+  </body>
+</html>
